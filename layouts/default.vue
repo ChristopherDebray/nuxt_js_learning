@@ -4,7 +4,10 @@
             <slot name="title"></slot>
         </h1>
         <div>
-            <slot></slot>
+            <SideNav />
+            <main>
+                <slot></slot>
+            </main>
         </div>
     </div>
 </template>
