@@ -13,4 +13,11 @@ export default defineNuxtConfig({
       },
     ],
   },
+  modules: [
+    '@pinia/nuxt',
+  ],
+  pinia: {
+    // By default pinia only import stores at the root of the stores folder, not the sub folders
+    storesDirs: ['./stores/**'],
+  }
 })

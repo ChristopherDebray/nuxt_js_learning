@@ -1,5 +1,6 @@
 <template>
     <div>
+        <NuxtRouteAnnouncer :atomic=true />
         <NuxtLoadingIndicator />
         <NuxtLayout>
             <NuxtPage />
