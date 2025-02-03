@@ -4,11 +4,11 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' }
   },
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   components: {
     dirs: [
       {
-        path: '~/components/layouts',
+        path: '~/components',
         pathPrefix: false, // Disable prefixing for this folder
       },
     ],
