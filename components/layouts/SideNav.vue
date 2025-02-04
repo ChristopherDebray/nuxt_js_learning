@@ -13,7 +13,3 @@
     </ul>
   </nav>
 </template>
-
-<script lang="ts">
-console.log('loaded')
-</script>
