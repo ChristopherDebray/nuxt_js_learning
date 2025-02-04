@@ -5,9 +5,12 @@
         </h1>
         <div>
             <SideNav />
-            <main>
-                <slot></slot>
-            </main>
+            <div>
+                <Breadcrumb />
+                <main>
+                    <slot></slot>
+                </main>
+            </div>
         </div>
     </div>
 </template>
