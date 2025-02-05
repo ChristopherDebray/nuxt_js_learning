@@ -37,10 +37,10 @@ const tooltipClasses = computed(() =>
 .tooltip {
   @apply opacity-0 absolute transition-opacity invisible -translate-x-1/2 z-[1000];
   &--top {
-    @apply translate-y-[-150%];
+    @apply translate-y-[-110%];
   }
   &--bottom {
-    @apply translate-y-[150%];
+    @apply translate-y-[110%];
   }
 }
 

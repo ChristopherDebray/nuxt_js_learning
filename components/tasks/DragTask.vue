@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus'
 import { useMouse, useWindowScroll } from '@vueuse/core'
-import datas from "@/datas/tasks"
-import type Task from '@/types/tasks/Task'
-import DeleteTaskModal from '@/components/tasks/modals/DeleteTaskModal.vue'
+import datas from "~/datas/tasks"
+import type Task from '~/types/tasks/Task'
+import DeleteTaskModal from '~/components/tasks/modals/DeleteTaskModal.vue'
 
 type SelectedTask = {
   taskKey: string,
@@ -77,7 +77,6 @@ function openDeleteModal() {
 
       toast.add({
         title: 'Task ' + selectedTask.value?.taskKey + ' was deleted !',
-        id: 'modal-success'
       })
       modal.close()
     }
@@ -105,7 +104,6 @@ defineShortcuts({
       taskLists[selectedColumnStatus].splice(selectedTaskIndex + 1, 0, taskDuplicate)
       toast.add({
         title: 'Task ' + selectedTask.value?.taskKey + ' was duplicated !',
-        id: 'modal-success'
       })
     }
   },

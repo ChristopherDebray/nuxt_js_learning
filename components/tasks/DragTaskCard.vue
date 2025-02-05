@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import type Task from '@/types/tasks/Task';
+import type Task from '~/types/tasks/Task';
 
 const props = defineProps<{
   task: Task
