@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { TaskPriority } from '@/enums/tasks/TaskPriority';
+import { TaskPriority } from '~/enums/tasks/TaskPriority';
 
 const { taskPriority } = defineProps<{
     taskPriority: TaskPriority

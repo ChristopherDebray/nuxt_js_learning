@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { TaskType } from '@/enums/tasks/TaskType';
+import { TaskType } from '~/enums/tasks/TaskType';
 
 defineProps<{
   taskType: TaskType
