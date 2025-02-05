@@ -40,10 +40,11 @@ export function useNotification() {
     }) {
         toast.add({
             id: "invite",
-            title: "New Invitation",
+            title: "New invitation",
             description: `${invitation.senderEmail} invited you to ${invitation.targetType}: ${invitation.targetName}`,
-            icon: "i-heroicons-mail",
+            icon: "material-symbols:mail-rounded",
             color: "blue",
+            timeout: 10000,
             actions: [
                 {
                     label: "Accept",

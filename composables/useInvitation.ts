@@ -1,7 +1,7 @@
 export function useInvitation() {
     const { notifySuccess, notifyError, notifyInvitation } = useNotification();
 
-    async function handleAction(action: "accepted" | "refused", invitationId: number) {
+    async function handleInvitationResponse(action: "accepted" | "refused", invitationId: number) {
         try {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -14,7 +14,7 @@ export function useInvitation() {
         }
     }
 
-    function inviteUser(invitation: {
+    function displayInvitationPrompt(invitation: {
         id: number;
         senderEmail: string;
         targetType: string;
@@ -22,10 +22,10 @@ export function useInvitation() {
     }) {
         notifyInvitation({
             ...invitation,
-            onAccept: () => handleAction("accepted", invitation.id),
-            onReject: () => handleAction("refused", invitation.id),
+            onAccept: () => handleInvitationResponse("accepted", invitation.id),
+            onReject: () => handleInvitationResponse("refused", invitation.id),
         });
     }
 
-    return { inviteUser };
+    return { displayInvitationPrompt };
 }
