@@ -2,7 +2,8 @@
 import { VueDraggable } from 'vue-draggable-plus'
 import { useMouse, useWindowScroll } from '@vueuse/core'
 import datas from "@/datas/tasks"
-import type Task from '~/types/tasks/Task'
+import type Task from '@/types/tasks/Task'
+import DeleteTaskModal from '@/components/tasks/modals/DeleteTaskModal.vue'
 
 type SelectedTask = {
   taskKey: string,
@@ -16,30 +17,25 @@ const isOpen = ref(false)
 const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 const selectedTask = ref<SelectedTask | null>(null)
 const { metaSymbol } = useShortcuts()
+const toast = useToast()
+const modal = useModal()
+let selectedColumnStatus: string | null = null;
+
 
 function onContextMenu(event: MouseEvent) {
   event.preventDefault()
 
-  // Find closest task element (if right-clicked inside a task)
   const taskElement = (event.target as HTMLElement).closest('.task-item')
-  if (!taskElement) return // Only open menu if click on a task
- 
+  if (!taskElement) return
+
   const taskKey = taskElement.dataset.taskKey
   selectedTask.value = {
     taskKey: taskKey,
     status: taskElement.dataset.taskStatus
   }
-  
-  // const taskObject: Task = taskLists[newStatus].find((task: Task) => task.key === taskKey);
-  // console.log(taskObject);
 
   const taskColumn = (event.target as HTMLElement).closest('.task-list')
-  const columnStatus = taskColumn.dataset.taskStatus;
-  
-  console.error(
-    taskLists[columnStatus].findIndex((task: Task) => task.key === taskKey)
-  );
-  
+  selectedColumnStatus = taskColumn.dataset.taskStatus;
 
   // Set virtual position
   const top = y.value - windowY.value
@@ -61,7 +57,7 @@ function onAdd(event) {
   const taskKey = event.item.dataset.taskKey;
   const newColumn = event.to;
   const newStatus = newColumn.dataset.taskStatus;
-  const taskObject: Task = taskLists[newStatus].find((task: Task) => task.key === taskKey);
+  const taskObject: Task = taskLists[selectedColumnStatus].find((task: Task) => task.key === taskKey);
   /**
    * @todo use taskObject to change the status
    */
@@ -70,17 +66,47 @@ function remove(event) {
   console.log('remove', event)
 }
 
+function openDeleteModal() {
+  modal.open(DeleteTaskModal, {
+    onSuccess() {
+      /**
+       * @todo call api to delete task + try catch
+       */
+      const selectedTaskIndex = taskLists[selectedColumnStatus].findIndex((task: Task) => selectedTask.value?.taskKey === task.key)
+      taskLists[selectedColumnStatus].splice(selectedTaskIndex, 1)
+
+      toast.add({
+        title: 'Task ' + selectedTask.value?.taskKey + ' was deleted !',
+        id: 'modal-success'
+      })
+      modal.close()
+    }
+  })
+}
+
 defineShortcuts({
   meta_D: {
     usingInput: true,
     whenever: [isOpen],
-    handler: () => { alert('delete') }
+    handler: () => {
+      openDeleteModal()
+    }
   },
   alt_D: {
     usingInput: true,
     whenever: [isOpen],
     handler: () => {
-      taskLists[columnStatus].findIndex((task: Task) => task.key === taskKey)
+      const selectedTaskIndex = taskLists[selectedColumnStatus].findIndex((task: Task) => selectedTask.value?.taskKey === task.key)
+      const taskDuplicate = Object.assign({}, taskLists[selectedColumnStatus][selectedTaskIndex]);
+
+      /**
+       * @todo call api to duplicate task + try catch, like a task creation but remove the task key
+       */
+      taskLists[selectedColumnStatus].splice(selectedTaskIndex + 1, 0, taskDuplicate)
+      toast.add({
+        title: 'Task ' + selectedTask.value?.taskKey + ' was duplicated !',
+        id: 'modal-success'
+      })
     }
   },
   E: {
@@ -104,9 +130,9 @@ defineShortcuts({
 
       <UContextMenu v-model="isOpen" :virtual-element="virtualElement" :popper="{ arrow: true, placement: 'right' }">
         <div class="px-4 py-2 m-1 hover:bg-slate-100 cursor-pointer flex items-middle">
-          Edit <UKbd class="ml-2">E</UKbd>
+            Edit <UKbd class="ml-2">E</UKbd>
         </div>
-        <div class="px-4 py-2 m-1 hover:bg-slate-100 cursor-pointer flex items-middle">
+        <div class="px-4 py-2 m-1 hover:bg-slate-100 cursor-pointer flex items-middle" @click="openDeleteModal">
           Delete <UKbd class="ml-2">{{ metaSymbol }} + D</UKbd>
         </div>
         <div class="px-4 py-2 m-1 hover:bg-slate-100 cursor-pointer flex items-middle">
