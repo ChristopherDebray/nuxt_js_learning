@@ -1,4 +1,4 @@
-import type Task from "@/types/tasks/Task"
+import type Task from "~/types/tasks/Task"
 import { TaskPriority } from "~/enums/tasks/TaskPriority"
 import { TaskType } from "~/enums/tasks/TaskType"
 import { userOne, userThree, userTwo } from "./taskUsers"

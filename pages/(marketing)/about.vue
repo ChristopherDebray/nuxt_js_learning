@@ -1,6 +1,7 @@
 <template>
     <div>
         About
+        <DragTest />
     </div>
 </template>
 

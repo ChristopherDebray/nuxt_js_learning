@@ -1,4 +1,4 @@
-import type TaskUser from "@/types/tasks/TaskUser";
+import type TaskUser from "~/types/tasks/TaskUser";
 
 export const userOne: TaskUser = {
     user_email: 'userOne@gmail.com'

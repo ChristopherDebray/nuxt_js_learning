@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Form, FormSubmitEvent } from '#ui/types'
-import { RegisterSchema } from "@/schemas/auth"
-import type { RegisterType } from "@/schemas/auth"
+import { RegisterSchema } from "~/schemas/profiles/auth"
+import type { RegisterType } from "~/schemas/profiles/auth"
 
 const state = reactive({
   email: undefined,
