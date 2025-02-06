@@ -2,6 +2,7 @@
 import type { Form, FormSubmitEvent } from '#ui/types'
 import { RegisterSchema } from "~/schemas/profiles/auth"
 import type { RegisterType } from "~/schemas/profiles/auth"
+import type { FormErrorType } from '~/types/utilities/FormErrorType'
 
 const state = reactive({
   email: undefined,
@@ -17,7 +18,7 @@ async function onSubmit(event: FormSubmitEvent<RegisterType>) {
     await fakeApiRequest(event.data);
   } catch (error: any) {
     if (error.response?.data?.errors) {
-      form.value!.setErrors(error.response.data.errors.map((err) => ({
+      form.value!.setErrors(error.response.data.errors.map((err: FormErrorType) => ({
         message: err.message,
         path: err.path,
       })))

@@ -2,6 +2,7 @@
 import type { Form, FormSubmitEvent } from '#ui/types'
 import { LoginSchema } from "~/schemas/profiles/auth"
 import type { LoginType } from "~/schemas/profiles/auth"
+import type { FormErrorType } from '~/types/utilities/FormErrorType'
 
 const state = reactive({
   email: undefined,
@@ -15,7 +16,7 @@ async function onSubmit(event: FormSubmitEvent<LoginType>) {
     navigateTo('/projects')
   } catch (error: any) {
     if (error.response?.data?.errors) {
-      form.value!.setErrors(error.response.data.errors.map((err) => ({
+      form.value!.setErrors(error.response.data.errors.map((err: FormErrorType) => ({
         message: err.message,
         path: err.path,
       })))

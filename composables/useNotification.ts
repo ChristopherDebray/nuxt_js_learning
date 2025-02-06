@@ -49,14 +49,14 @@ export function useNotification() {
                     label: "Accept",
                     click: () => {
                         toast.remove("invite");
-                        invitation.onAccept(); // Calls the accept handler
+                        invitation.onAccept();
                     },
                 },
                 {
                     label: "Reject",
                     click: () => {
                         toast.remove("invite");
-                        invitation.onReject(); // Calls the reject handler
+                        invitation.onReject();
                     },
                 },
             ],

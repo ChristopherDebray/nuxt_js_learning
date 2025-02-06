@@ -4,6 +4,7 @@ import type { TaskImportType } from '~/schemas/tasks/tasks';
 import type { Form, FormSubmitEvent } from '~/node_modules/@nuxt/ui/dist/runtime/types/form';
 import { TaskPriority } from '~/enums/tasks/TaskPriority';
 import { TaskType } from '~/enums/tasks/TaskType';
+import type { FormErrorType } from '~/types/utilities/FormErrorType';
 
 const emit = defineEmits(['success'])
 
@@ -17,7 +18,7 @@ async function onSubmit(event: FormSubmitEvent<TaskImportType>) {
         emit('success')
     } catch (error: any) {
         if (error.response?.data?.errors) {
-            form.value!.setErrors(error.response.data.errors.map((err) => ({
+            form.value!.setErrors(error.response.data.errors.map((err: FormErrorType) => ({
                 message: err.message,
                 path: err.path,
             })))
