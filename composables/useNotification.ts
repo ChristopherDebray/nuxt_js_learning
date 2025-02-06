@@ -1,4 +1,3 @@
-// ~/composables/useNotification.ts
 export function useNotification() {
     const toast = useToast();
 
