@@ -17,7 +17,7 @@ const isOpen = ref(false)
 const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 const selectedTask = ref<SelectedTask | null>(null)
 const { metaSymbol } = useShortcuts()
-const toast = useToast()
+const { notifySuccess } = useNotification()
 const modal = useModal()
 let selectedColumnStatus: string | null = null;
 
@@ -75,9 +75,7 @@ function openDeleteModal() {
       const selectedTaskIndex = taskLists[selectedColumnStatus].findIndex((task: Task) => selectedTask.value?.taskKey === task.key)
       taskLists[selectedColumnStatus].splice(selectedTaskIndex, 1)
 
-      toast.add({
-        title: 'Task ' + selectedTask.value?.taskKey + ' was deleted !',
-      })
+      notifySuccess('Task ' + selectedTask.value?.taskKey + ' was deleted !')
       modal.close()
     }
   })
@@ -102,9 +100,7 @@ defineShortcuts({
        * @todo call api to duplicate task + try catch, like a task creation but remove the task key
        */
       taskLists[selectedColumnStatus].splice(selectedTaskIndex + 1, 0, taskDuplicate)
-      toast.add({
-        title: 'Task ' + selectedTask.value?.taskKey + ' was duplicated !',
-      })
+      notifySuccess('Task ' + selectedTask.value?.taskKey + ' was duplicated !')
     }
   },
   E: {

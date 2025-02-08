@@ -30,7 +30,7 @@ function onSubmit(event: FormSubmitEvent<DeleteProfileType>) {
 <template>
     <UModal>
         <UCard>
-            <UForm :schema="DeleteProfileSchema" :state="state" class="space-y-4" @submit="onSubmit">
+            <UForm :schema="DeleteProfileSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
                 <h2 class="text-lg font-medium text--primary">
                     Are you sure you want to delete your account?
                 </h2>

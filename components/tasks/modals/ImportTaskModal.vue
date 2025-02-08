@@ -37,7 +37,7 @@ function handleFileChange(event: Event) {
 <template>
     <UModal>
         <UCard>
-            <UForm ref="form" :schema="TaskImportSchema" :state="state" class="space-y-4" @submit="onSubmit">
+            <UForm ref="form" :schema="TaskImportSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
                 <h2 class="text-lg font-medium text--primary">
                     Import tasks
                 </h2>

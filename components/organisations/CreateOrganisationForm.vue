@@ -1,30 +1,41 @@
 <script setup lang="ts">
 import type { Form, FormSubmitEvent } from '~/node_modules/@nuxt/ui/dist/runtime/types/form';
 import { OrganisationCreateSchema, type OrganisationCreateType } from '~/schemas/organisations/organisations';
+import type Organisation from '~/types/organisations/Organisation';
+
+const emit = defineEmits<{
+    (e: 'createOrganisation', organisation: Organisation): void
+}>()
 
 const modal = useModal();
 const state = reactive({
-    name: undefined,
-    description: undefined,
-    taskPrefix: undefined,
+    name: '',
+    description: '',
+    taskPrefix: '',
 })
 const isCreateModalOpen = ref(false)
 const form = ref<Form<OrganisationCreateType>>()
 const { notifySuccess } = useNotification();
 
 function onSubmit(event: FormSubmitEvent<OrganisationCreateType>) {
-    notifySuccess('Organisations has been created')
+    notifySuccess('Organisation has been created')
     isCreateModalOpen.value = false
+    const organisation: Organisation = {
+        id: 40,
+        ...state
+    }
+
+    emit('createOrganisation', organisation);
 }
 </script>
 
 <template>
     <section>
         <UButton @click="isCreateModalOpen = true">Create an organisation</UButton>
-        
+
         <UModal v-model="isCreateModalOpen">
             <UCard>
-                <UForm :schema="OrganisationCreateSchema" :state="state" class="space-y-4" @submit="onSubmit">
+                <UForm :schema="OrganisationCreateSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
                     <h2 class="text-lg font-medium text--primary">
                         Create an organisation
                     </h2>
@@ -41,7 +52,8 @@ function onSubmit(event: FormSubmitEvent<OrganisationCreateType>) {
                         <UInput v-model="state.taskPrefix" placeholder="Enter the organisation task prefix" />
                     </UFormGroup>
                     <p class="mt-1 text-sm text--secondary block sm:w-3/4 w-full">
-                        If you add the prefix "tms_" all your ticket will be named as follow "tms_TICKET_NUMBER" for instance "tms_1".
+                        If you add the prefix "tms_" all your ticket will be named as follow "tms_TICKET_NUMBER" for
+                        instance "tms_1".
                     </p>
 
                     <UButton @click="modal.close()">Cancel</UButton>

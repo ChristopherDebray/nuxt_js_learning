@@ -54,7 +54,7 @@ definePageMeta({
   <main class="w-full max-w-3xl shadow-xl bg-white grid grid-cols-2 rounded-lg">
     <div class="py-8 px-6 col-span-2 md:col-span-1">
       <h2 class="text-2xl font-semibold text-gray-700 mb-4">Register</h2>
-      <UForm ref="form" :schema="RegisterSchema" :state="state" class="space-y-4" @submit="onSubmit">
+      <UForm ref="form" :schema="RegisterSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
         <UFormGroup label="Firstname" name="firstname">
           <UInput v-model="state.firstname" placeholder="Enter your firstname" />
         </UFormGroup>

@@ -23,7 +23,7 @@ function onSubmit(event: FormSubmitEvent<OrganisationCreateType>) {
 <template>
     <UModal>
         <UCard>
-            <UForm :schema="OrganisationCreateSchema" :state="state" class="space-y-4" @submit="onSubmit">
+            <UForm :schema="OrganisationCreateSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
                 <h2 class="text-lg font-medium text--primary">
                     Update an organisation
                 </h2>

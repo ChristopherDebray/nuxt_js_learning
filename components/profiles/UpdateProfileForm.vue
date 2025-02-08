@@ -28,7 +28,7 @@ function onSubmit(event: FormSubmitEvent<UpdateProfileType>) {
         </header>
 
 
-        <UForm :schema="UpdateProfileSchema" :state="state" @submit="onSubmit" class="space-y-4">
+        <UForm :schema="UpdateProfileSchema" :state="state" @submit.once="onSubmit" class="space-y-4">
             <UFormGroup label="Firstname" name="firstname">
                 <UInput name="firstname" v-model="state.firstname" />
             </UFormGroup>

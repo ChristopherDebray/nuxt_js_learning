@@ -23,7 +23,7 @@ function onSubmit(event: FormSubmitEvent<UpdatePasswordType>) {
             </h2>
         </header>
 
-        <UForm ref="form" :schema="UpdatePasswordSchema" :state="state" class="space-y-4" @submit="onSubmit">
+        <UForm ref="form" :schema="UpdatePasswordSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
             <UFormGroup label="New password" name="password">
                 <UInput type="password" v-model="state.password" />
             </UFormGroup>

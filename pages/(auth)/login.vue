@@ -53,7 +53,7 @@ definePageMeta({
     <!-- Left: Login Form -->
     <div class="py-8 px-6 col-span-2 md:col-span-1">
       <h2 class="text-2xl font-semibold text-gray-700 mb-4">Login</h2>
-      <UForm ref="form" :schema="LoginSchema" :state="state" class="space-y-4" @submit="onSubmit">
+      <UForm ref="form" :schema="LoginSchema" :state="state" class="space-y-4" @submit.once="onSubmit">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" placeholder="Enter your email" />
         </UFormGroup>

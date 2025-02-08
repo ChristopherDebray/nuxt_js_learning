@@ -18,7 +18,7 @@ function onSubmit() {
 <template>
     <UModal>
         <UCard>
-            <UForm :state="state" class="space-y-4" @submit="onSubmit">
+            <UForm :state="state" class="space-y-4" @submit.once="onSubmit">
                 <h2 class="text-lg font-medium text--primary">
                     Delete this organisation
                 </h2>
