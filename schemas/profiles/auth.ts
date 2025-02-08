@@ -13,6 +13,8 @@ export const RegisterSchema = z.object({
     passwordConfirmation: z.string().min(8, "Must be at least 8 characters"),
     firstname: z.string(),
     lastname: z.string(),
+}).refine((data) => data.password === data.passwordConfirmation, {
+    message: "Password confirmation must match password.",
+    path: ["passwordConfirmation"], // This ensures the error is attached to `passwordConfirmation`
 });
-
 export type RegisterType = z.infer<typeof RegisterSchema>;
