@@ -5,7 +5,7 @@
         </h1>
         <div>
             <SideNav />
-            <div>
+            <div class="lg:pl-[260px] pl-0">
                 <Breadcrumb />
                 <main>
                     <slot></slot>
